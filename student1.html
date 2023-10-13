@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Roll Number Lookup</title>
+</head>
+<body>
+    <h1>Student Roll Number Lookup</h1>
+    <label for="studentNumbers">Enter Student Numbers:</label>
+    <input type="text" id="studentNumbers" placeholder="Enter numbers">
+    <button type="button" onclick="lookupStudents()">Lookup</button>
+    <div id="results"></div>
+
+    <script>
+        let studentData = [
+            { number: 65, rollNumber: "21CSR065", name: "INIKA N " },
+            { number: 66, rollNumber: "21CSR066", name: "JAISHRUTHIE SM " },
+            { number: 67, rollNumber: "21CSR067", name: "JAYANTH JR " },
+            { number: 68, rollNumber: "21CSR068", name: "JAYAVARSHINI S " },
+            { number: 69, rollNumber: "21CSR069", name: "JEEVASREE G " },
+            { number: 70, rollNumber: "21CSR070", name: "JEGAN S " },
+            { number: 71, rollNumber: "21CSR071", name: "JESSICA S " },
+            { number: 72, rollNumber: "21CSR072", name: "KALAISELVAN K" },
+            { number: 73, rollNumber: "21CSR073", name: "KALAIVANI B " },
+            { number: 74, rollNumber: "21CSR074", name: "KALPANADEVI G" },
+            { number: 75, rollNumber: "21CSR075", name: "KAMALESH J " },
+            { number: 76, rollNumber: "21CSR076", name: "KANISHA A " },
+            { number: 77, rollNumber: "21CSR077", name: "KARAN M " },
+            { number: 78, rollNumber: "21CSR078", name: "KARTHICK P " },
+            { number: 79, rollNumber: "21CSR079", name: "KARTHICK S " },
+            { number: 80, rollNumber: "21CSR080", name: "KARTHICKRAJAN S" },
+            { number: 81, rollNumber: "21CSR081", name: "KARTHIK RAJ E" },
+            { number: 82, rollNumber: "21CSR082", name: "KARTHIK S" },
+            { number: 83, rollNumber: "21CSR083", name: "KARTHIKA K " },
+            { number: 84, rollNumber: "21CSR084", name: "KAVIN B " },
+            { number: 85, rollNumber: "21CSR085", name: "KAVIN NISHANTHAN PD " },
+            { number: 86, rollNumber: "21CSR086", name: "KAVIN R " },
+            { number: 87, rollNumber: "21CSR087", name: "KAVIPRIYAN RK " },
+            { number: 88, rollNumber: "21CSR088", name: "KAVIYA K" },
+            { number: 89, rollNumber: "21CSR089", name: "KAVIYA P" },
+            { number: 90, rollNumber: "21CSR090", name: "KAVYA P" },
+            { number: 91, rollNumber: "21CSR091", name: "KAVYA S " },
+            { number: 92, rollNumber: "21CSR092", name: "KEERTHANA G " },
+            { number: 93, rollNumber: "21CSR093", name: "KEERTHANA DEVI S " },
+            { number: 94, rollNumber: "21CSR094", name: "KEERTHIBALA A T" },
+            { number: 95, rollNumber: "21CSR095", name: "KIRUTHIYAASHREE S P" },
+            { number: 96, rollNumber: "21CSR096", name: "KOWSIKA P" },
+            { number: 97, rollNumber: "21CSR097", name: "KRISHNA B " },
+            { number: 98, rollNumber: "21CSR098", name: "LINGESHWARAN S " },
+            { number: 99, rollNumber: "21CSR099", name: "LOKESH A " },
+            { number: 100, rollNumber: "21CSR100", name: "MADHAVAN R " },
+            { number: 101, rollNumber: "21CSR101", name: "MADHU BALAJI VS " },
+            { number: 102, rollNumber: "21CSR102", name: "MADHUCHERAN R " },
+            { number: 103, rollNumber: "21CSR103", name: "MADHUMITA C " },
+            { number: 104, rollNumber: "21CSR104", name: "MADHURAJYOTHI V K " },
+            { number: 105, rollNumber: "21CSR105", name: "MAHAPRABU S " },
+            { number: 106, rollNumber: "21CSR106", name: "MALARVIZHI V" },
+            { number: 107, rollNumber: "21CSR107", name: "MALATHI S " },
+            { number: 108, rollNumber: "21CSR108", name: "MANIPRABHA S" },
+            { number: 109, rollNumber: "21CSR109", name: "MANO SUNDAR M " },
+            { number: 110, rollNumber: "21CSR110", name: "MATHAN KUMAR A " },
+            { number: 111, rollNumber: "21CSR111", name: "MOHAMMED YUNUS M " },
+            { number: 112, rollNumber: "21CSR112", name: "MOHANRAJ CM " },
+            { number: 113, rollNumber: "21CSR113", name: "MOHIT KS " },
+            { number: 114, rollNumber: "21CSR114", name: "MONISH MM" },
+            { number: 115, rollNumber: "21CSR115", name: "MOUNISH N " },
+            { number: 116, rollNumber: "21CSR116", name: "MRUDHULA SHRI M " },
+            { number: 117, rollNumber: "21CSR117", name: "MUGHIL J " },
+            { number: 118, rollNumber: "21CSR118", name: "MUKHIL KUMARAN S " },
+            { number: 119, rollNumber: "21CSR119", name: "MURUGANANTHAM T" },
+            { number: 120, rollNumber: "21CSR120", name: "MUTHU KARUPPAN P " },
+            { number: 121, rollNumber: "21CSR121", name: "MYTHILI S " },
+            { number: 122, rollNumber: "21CSR122", name: "NAHUL ATHITHYA M" },
+            { number: 123, rollNumber: "21CSR123", name: "NANDHINI K " },
+            { number: 124, rollNumber: "21CSr124", name: "NAVEEN KRISHNA KR " },
+            { number: 125, rollNumber: "21CSR125", name: "NEKELASHIL" },
+            { number: 253, rollNumber: "21CSL253", name: "AKILESH S " },
+            { number: 256, rollNumber: "21CSL256", name: "DANEESH M " },
+            { number: 257 , rollNumber: "21CSL257 ",name: "DHARSHAN P" },
+            { number: 259, rollNumber: "21CSL259", name: "INDRA B " },
+            { number: 260, rollNumber: "21CSL260", name: "KANISHKAR B " },
+            { number: 261, rollNumber: "21CSL261", name: "KANISHK P" },
+            { number: 262, rollNumber: "21CSL262", name: "KIRUTHIKA R " },
+        ];
+
+        function lookupStudents() {
+            const inputField = document.getElementById("studentNumbers");
+            const studentNumbers = inputField.value.split(',').map(num => parseInt(num.trim()));
+            const resultsContainer = document.getElementById("results");
+            resultsContainer.innerHTML = ""; // Clear previous results
+
+            studentNumbers.forEach(studentNumber => {
+                const student = studentData.find(student => student.number === studentNumber);
+                if (student) {
+                    const result = document.createElement("div");
+                    result.innerText = `Number: ${student.number}, Roll Number: ${student.rollNumber}, Name: ${student.name}`;
+                    resultsContainer.appendChild(result);
+                } else {
+                    const result = document.createElement("div");
+                    result.innerText = `Student with number ${studentNumber} not found.`;
+                    resultsContainer.appendChild(result);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
